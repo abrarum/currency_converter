@@ -1,4 +1,4 @@
-![A screenshot of currency converter with historical graph](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![A screenshot of currency converter with historical graph](https://github.com/abrarum/currency_converter/blob/main/demo_currency_convert.png)
 
 # currency_converter
 Created with CodeSandbox
