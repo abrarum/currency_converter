@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/material": "latest",
+    "@types/faker": "5.5.3",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "chart.js": "3.8.0",
+    "color-scheme": "1.0.1",
+    "faker": "5.5.3",
+    "react": "latest",
+    "react-chartjs-2": "4.1.0",
+    "react-dom": "latest",
+    "typescript": "latest"
+  },
+  "description": "https://github.com/mui/material-ui/blob/v5.8.1/docs/data/material/components/selects/BasicSelect.tsx",
+  "devDependencies": {
+    "react-scripts": "latest"
+  },
+  "main": "src/index.tsx",
+  "name": "BasicSelect demo — Material UI",
+  "scripts": {
+    "start": "react-scripts start"
+  }
+}
