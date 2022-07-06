@@ -6,14 +6,14 @@ import { FormatDate, FetchConfig, SetItem, GetItem } from "./shared/utility";
 import constants from "./shared/constants";
 
 export default function BasicSelect() {
-  const [historyRates, setHistoryRates] = useState([]);
+  const [historyRates, setHistoryRates] = useState<{ [key: string]: {} }[]>([]);
   const [updateHistory, setUpdateHistory] = useState(false);
-  const [currencyList, setCurrencyList] = useState({});
+  const [currencyList, setCurrencyList] = useState<{ [key: string]: string }[]>([]);
   const requestOptions = FetchConfig();
 
   const fetchHistoricalRates = () => {
     const historyList = GetItem(constants.LS_HISTORY);
-
+    console.log('historyList', historyList)
     if (historyList && !updateHistory) {
       console.log("accessing localstorage");
       setHistoryRates(historyList);
@@ -40,8 +40,8 @@ export default function BasicSelect() {
       )
         .then((response) => response.json())
         .then((result) => {
-          setHistoryRates(result);
-          SetItem(constants.LS_HISTORY, result);
+          setHistoryRates(result.quotes);
+          SetItem(constants.LS_HISTORY, result.quotes);
         })
         .catch((error) => console.log("error", error));
 
@@ -84,9 +84,7 @@ export default function BasicSelect() {
     fetchCurrencies();
     fetchHistoricalRates();
   }, [updateHistory]);
-
-  console.log("updateHistory", updateHistory);
-
+  
   return (
     <Box sx={{ minWidth: 120 }}>
       <Converter />

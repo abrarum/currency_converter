@@ -1,4 +1,5 @@
 import ColorScheme from "color-scheme";
+import {RequestOptionsType} from './types'
 
 export function FormatDate(date: Date, joinBy: string) {
   console.log("date is: ", date);
@@ -27,9 +28,9 @@ export function GenSimilarColors() {
 
 export function FetchConfig() {
   var myHeaders = new Headers();
-  myHeaders.append("apikey", process.env.REACT_APP_APP_ID);
+  myHeaders.append("apikey", process.env.APP_ID);
 
-  var requestOptions = {
+  var requestOptions: RequestOptionsType = {
     method: "GET",
     headers: myHeaders,
     redirect: "follow"

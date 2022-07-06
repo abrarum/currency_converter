@@ -7,13 +7,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import constants from "../shared/constants";
-import { defaultCurrencies } from "../shared/types";
+import { DefaultCurrencies } from "../shared/types";
 import TextField from "@mui/material/TextField";
 import { FetchConfig } from "../shared/utility";
 import Paper from "@mui/material/Paper";
-import "../../global.css";
+import "../global.css"
 
-const defaultValues: defaultCurrencies = {
+const defaultValues: DefaultCurrencies = {
   curr1: Object.keys(constants.CURRENCIES)[0],
   curr2: Object.keys(constants.CURRENCIES)[1],
   amount: 0
@@ -40,7 +40,7 @@ export default function Converter() {
       .catch((error) => console.log("error", error));
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>): void => {
     setRates(0);
     const { name, value } = e.target;
     setFormValues({
@@ -49,17 +49,18 @@ export default function Converter() {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     console.log(formValues);
     fetchConvertRates();
   };
+
   return (
     <Box sx={{ minWidth: 120 }}>
       <form onSubmit={handleSubmit}>
         <Paper className="currency_form">
           <Typography className="currency_result" variant="h2">
-            {constants.CURRENCIES[formValues.curr2]}
+            {constants.CURRENCIES[formValues.curr2 as keyof typeof constants.CURRENCIES]}
             {rates}
           </Typography>
 

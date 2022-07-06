@@ -22,8 +22,8 @@ import {
   Legend
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import faker from "faker";
 import { GenSimilarColors } from "../shared/utility";
+import { ChartProps } from '../shared/types'
 
 ChartJS.register(
   CategoryScale,
@@ -35,17 +35,19 @@ ChartJS.register(
   Legend
 );
 
+let defaultGraphDataStruct: any = {
+  labels: [],
+  datasets: []
+};
+
 export default function Chart({
   currencies,
   history,
   updateStatus,
   updateHistory
-}) {
+}: ChartProps) {
   const [currencySelect, setCurrencySelect] = React.useState<string[]>([]);
-  const [graphData, setGraphData] = React.useState({
-    labels: [],
-    datasets: [{}]
-  });
+  const [graphData, setGraphData] = React.useState<any>(defaultGraphDataStruct);
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -72,19 +74,16 @@ export default function Chart({
   };
 
   useEffect(() => {
-    if (currencySelect.length !== 0) {
-      const labels = history.quotes ? Object.keys(history.quotes) : [];
-
-      let itemStruct = {
-        labels: labels,
-        datasets: []
-      };
+    console.log('hieeeer')
+    if (currencySelect.length != 0) {
+      const labels = history ? Object.keys(history) : [];
+      defaultGraphDataStruct.labels = labels;
       currencySelect.forEach((item) => {
         let colorScheme = GenSimilarColors();
-        itemStruct.datasets.push({
+        defaultGraphDataStruct.datasets.push({
           label: item,
-          data: history.quotes
-            ? Object.entries(history.quotes).map(
+          data: history
+            ? Object.entries(history).map(
                 ([key, val]) => val["EUR" + item]
               )
             : [],
@@ -92,7 +91,7 @@ export default function Chart({
           backgroundColor: "#" + colorScheme[0]
         });
       });
-      setGraphData(itemStruct);
+      setGraphData(defaultGraphDataStruct.datasets);
     }
   }, [currencySelect]);
 
@@ -138,7 +137,7 @@ export default function Chart({
           style={{ display: updateHistory ? "block" : "none" }}
         />
       </Box>
-      <Line className="chart_graph" options={options} data={graphData} />
+      <Line className="chart_graph" options={options} data={graphData!} />
     </Paper>
   );
 }
