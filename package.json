@@ -21,7 +21,8 @@
   "main": "src/index.tsx",
   "name": "BasicSelect demo — Material UI",
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "browserslist": {
     "production": [
