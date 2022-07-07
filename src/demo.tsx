@@ -4,11 +4,21 @@ import Converter from "./components/Converter";
 import Chart from "./components/Chart";
 import { FormatDate, FetchConfig, SetItem, GetItem } from "./shared/utility";
 import constants from "./shared/constants";
+import styled from "styled-components";
+
+/* styling */
+const GithubLink = styled.a`
+  display: block;
+  width: 100%;
+  text-align: center;
+`;
 
 export default function BasicSelect() {
   const [historyRates, setHistoryRates] = useState<{ [key: string]: {} }[]>([]);
   const [updateHistory, setUpdateHistory] = useState(false);
-  const [currencyList, setCurrencyList] = useState<{ [key: string]: string }[]>([]);
+  const [currencyList, setCurrencyList] = useState<{ [key: string]: string }[]>(
+    []
+  );
   const requestOptions = FetchConfig();
 
   const fetchHistoricalRates = () => {
@@ -58,9 +68,15 @@ export default function BasicSelect() {
     fetchCurrencies();
     fetchHistoricalRates();
   }, [updateHistory]);
-  
+
   return (
     <Box sx={{ minWidth: 120 }}>
+      <GithubLink
+        target="_blank"
+        href="https://github.com/abrarum/currency_converter"
+      >
+        Github
+      </GithubLink>
       <Converter />
       <Chart
         updateHistory={updateHistory}
