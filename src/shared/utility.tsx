@@ -2,7 +2,6 @@ import ColorScheme from "color-scheme";
 import {RequestOptionsType} from './types'
 
 export function FormatDate(date: Date, joinBy: string) {
-  console.log("date is: ", date);
   const formattedMonth = String(date.getMonth() + 1).padStart(2, "0");
   const formattedDate = String(date.getDate()).padStart(2, "0");
   return [date.getFullYear(), formattedMonth, formattedDate].join(joinBy);
@@ -28,7 +27,7 @@ export function GenSimilarColors() {
 
 export function FetchConfig() {
   var myHeaders = new Headers();
-  myHeaders.append("apikey", process.env.APP_ID);
+  myHeaders.append("apikey", process.env.REACT_APP_APP_ID);
 
   var requestOptions: RequestOptionsType = {
     method: "GET",

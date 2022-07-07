@@ -51,7 +51,6 @@ export default function Converter() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(formValues);
     fetchConvertRates();
   };
 

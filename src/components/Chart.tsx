@@ -35,11 +35,6 @@ ChartJS.register(
   Legend
 );
 
-let defaultGraphDataStruct: any = {
-  labels: [],
-  datasets: []
-};
-
 export default function Chart({
   currencies,
   history,
@@ -47,7 +42,7 @@ export default function Chart({
   updateHistory
 }: ChartProps) {
   const [currencySelect, setCurrencySelect] = React.useState<string[]>([]);
-  const [graphData, setGraphData] = React.useState<any>(defaultGraphDataStruct);
+  const [graphData, setGraphData] = React.useState<any>({ labels: [], datasets: [] });
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -74,13 +69,16 @@ export default function Chart({
   };
 
   useEffect(() => {
-    console.log('hieeeer')
     if (currencySelect.length != 0) {
       const labels = history ? Object.keys(history) : [];
-      defaultGraphDataStruct.labels = labels;
+      let itemStruct: any = {
+        labels: labels,
+        datasets: []
+      }
+      itemStruct.labels = labels;
       currencySelect.forEach((item) => {
         let colorScheme = GenSimilarColors();
-        defaultGraphDataStruct.datasets.push({
+        itemStruct.datasets.push({
           label: item,
           data: history
             ? Object.entries(history).map(
@@ -91,7 +89,7 @@ export default function Chart({
           backgroundColor: "#" + colorScheme[0]
         });
       });
-      setGraphData(defaultGraphDataStruct.datasets);
+      setGraphData(itemStruct);
     }
   }, [currencySelect]);
 
@@ -104,9 +102,6 @@ export default function Chart({
       typeof value === "string" ? value.split(",") : value
     );
   };
-
-  console.log("updateHistoryX", updateHistory);
-
   return (
     <Paper>
       <Box className="chart_fields">

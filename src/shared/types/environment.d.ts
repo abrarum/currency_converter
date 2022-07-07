@@ -5,7 +5,7 @@ declare global {
       NODE_ENV: "development" | "production";
       PORT?: string;
       PWD: string;
-      APP_ID: string;
+      REACT_APP_APP_ID: string;
     }
   }
 }
