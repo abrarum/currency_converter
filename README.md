@@ -2,6 +2,8 @@
 
 # currency_converter
 
+## [Live Demo](https://currency-converter-self.vercel.app/)
+
 ## how to run?
 
 1. npm install on root.
